@@ -6,8 +6,9 @@ namespace Entities.Responses
 {
     public class Response
     {
-        Business_Errors Bussines_Errors { get; set; }
         Current_Balance Current_Balance { get; set; }
+        List<Business_Error> Bussines_Errors { get; set; }
+        
 
     }
 }
