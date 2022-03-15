@@ -12,7 +12,7 @@ namespace Business
         {
             using (var db = new Context())
             {
-                account.Issuers = new List<Stock>();
+                account.Issuers = new List<Issuer>();
                 db.Accounts.Add(account);
                 return db.SaveChanges();
             }

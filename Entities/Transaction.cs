@@ -17,7 +17,9 @@ namespace Entities
         public Issuer Issuer { get; set; }
         public int Total_Shares { get; set; }
         public int Shares_Prices { get; set; }
-
+        
+        public int Id { get; set; }
+        public Account Account { get; set; }
 
 
     }
