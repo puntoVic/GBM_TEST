@@ -37,7 +37,7 @@ namespace Business
         /// Function for update an issuer
         /// </summary>
         /// <param name="issuer">Issuer to update</param>
-        public static void UpdateAccount(Issuer issuer)
+        public static void UpdateIssuer(Issuer issuer)
         {
             using (var db = new Context())
             {
