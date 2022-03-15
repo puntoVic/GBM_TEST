@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "TV0hkYGMs6numCpgWnfmodjq/H85UckMt2j3o4lptgbD936BO4nAuBQp4ghFKwOjBsNobvwdtyYwwJJ/B2yCxQ==",
+  "success": true,
+  "projectFilePath": "D:\\Proyectos\\GBM\\API_TestGBM\\API_TestGBM\\API_TestGBM.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\volve\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.18\\microsoft.netcore.app.host.win-x64.3.1.18.nupkg.sha512"
+  ],
+  "logs": []
+}
