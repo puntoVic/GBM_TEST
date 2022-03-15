@@ -15,7 +15,6 @@ namespace Entities
 
         public ICollection<Stock> Stocks { get; set;  }
         public ICollection<Transaction> Transactions { get; set; }
-        public string MarketId { get; set; }
-        public Market Market { get; set; }
+        
     }
 }
