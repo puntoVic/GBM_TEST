@@ -14,7 +14,7 @@ namespace Entities
 
         public int Cash { get; set; }
 
-        public List<Stock> Stocks { get; set; }
+        public List<Stock> Issuers { get; set; }
 
     }
 }

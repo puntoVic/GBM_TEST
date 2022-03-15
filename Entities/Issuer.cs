@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Entities
 {
-    public class Issuer
+    public class Stock
     {
         [Key]
-        [StringLength(10)]
-        [Required]
-        public string Issuer_Name { get; set; }
-        public int Value { get; set; }
-
-        public ICollection<Stock> Stocks { get; set;  }
-        public ICollection<Transaction> Transactions { get; set; }
         
+        public string Issuer_Name { get; set; }
+        public int Total_Shares { get; set; }
+        public int Shares_Price { get; set; }
+
+        public string Id { get; set; }
+        public Account Account { get; set; }
     }
 }
