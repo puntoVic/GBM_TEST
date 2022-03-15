@@ -10,11 +10,15 @@ namespace DataAccess
     public class Context : DbContext
     {
         private readonly IConfiguration configuration;
-        protected Context(IConfiguration configuration)
+        public Context(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
+        public Context()
+        {
+            this.configuration = null;
+        }
         public DbSet<Issuer> Issuers { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Account> Accounts { get; set; }
@@ -63,4 +67,4 @@ namespace DataAccess
         }
     }
 }
-}
+
