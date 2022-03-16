@@ -2,31 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 using Entities;
-using DataAccess;
+using Entities.Responses;
+
 
 namespace Business
 {
     public class B_Transaction
     {
-        /// <summary>
-        /// Initial function to create a transaction  
-        /// </summary>
-        /// <param name="transaction">Transaction to create</param>
-        /// <returns></returns>
-        public static int CeateIssuer(Transaction transaction)
-        {
-            using (var db = new Context())
-            {
-                db.Transactions.Add(transaction);
-                return db.SaveChanges();
-            }
-        }
+        
         /// <summary>
         /// Function to execute a sale 
         /// </summary>
         /// <param name="transaction">Sale data</param>
-        public static void ExecuteSale(Transaction transaction)
+        public static Response ExecuteSale(Transaction transaction)
         {
+            Response response = new Response() { Current_Balance = new Current_Balance(), Bussines_Errors = new List<Business_Error>()};
             Account account = B_Account.SearchAccountById(transaction.Id);
             if (account != null)
             {
@@ -54,14 +44,18 @@ namespace Business
             {
                 //Error
             }
+            return response;
 
         }
         /// <summary>
         /// Function to excute a purchase
         /// </summary>
         /// <param name="transaction">Purchase data</param>
-        public static void ExecutePurchase(Transaction transaction)
+        public static Response ExecutePurchase(Transaction transaction)
         {
+            Response response = new Response() { Current_Balance = new Current_Balance(), Bussines_Errors = new List<Business_Error>() };
+            Current_Balance currentBalance = new Current_Balance();
+            Business_Error businessError = new Business_Error();
             Account account = B_Account.SearchAccountById(transaction.Id);
             int total = transaction.Total_Shares * transaction.Shares_Prices;
             if (B_Account.CheckBalance(account, total))
@@ -80,6 +74,7 @@ namespace Business
             {
                 //Error
             }
+            return response;
         }
 
 
