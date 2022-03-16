@@ -9,5 +9,10 @@ namespace Entities
         public int Cash { get; set; }
         public List<Issuer> Stocks { get; set; }
 
+        public Current_Balance()
+        {
+            Stocks = new List<Issuer>();
+        }
+
     }
 }

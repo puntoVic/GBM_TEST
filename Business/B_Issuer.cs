@@ -27,7 +27,7 @@ namespace Business
         /// <param name="issuers">Issuers List to find </param
         /// <param name="issuer_name">Issuer name</param>
         /// <returns></returns>
-        public static Issuer SearchAccountByName(List<Issuer> issuers, string issuer_name)
+        public static Issuer SearchIssuerByName(List<Issuer> issuers, string issuer_name)
         {
            
             return issuers.Find(x => x.Issuer_Name == issuer_name);

@@ -56,6 +56,12 @@ namespace Business
         {
             return account.Cash > totalSharePrice;
         }
-        
+
+        public static bool IsValidAccount(Account account)
+        {
+            return account != null && account.Id > 0 && account.Issuers != null;
+        }
+
+
     }
 }
