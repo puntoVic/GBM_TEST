@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess;
 
 namespace API_TestGBM
 {
@@ -18,6 +19,7 @@ namespace API_TestGBM
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            GeneralConfig.Connstring = configuration.GetConnectionString("DatabaseTest");
         }
 
         public IConfiguration Configuration { get; }

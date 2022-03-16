@@ -9,16 +9,7 @@ namespace DataAccess
 {
     public class Context : DbContext
     {
-        private readonly IConfiguration configuration;
-        public Context(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-        }
-
-        public Context()
-        {
-            this.configuration = null;
-        }
+        
         public DbSet<Issuer> Issuers { get; set; }
         public DbSet<Issuer> Stocks { get; set; }
         public DbSet<Account> Accounts { get; set; }
@@ -29,14 +20,14 @@ namespace DataAccess
         {
             if (!options.IsConfigured)
             {
-                if (configuration == null)
+                if (GeneralConfig.Connstring == null)
                 {
                     // Only used when generating migrations
-                    options.UseSqlServer("Server=DESKTOP-E0Q3KH2; Database= APITestGBM; User Id= sa; Password = SQL123");
+                    options.UseSqlServer("Set connection string only for migration");
                 }
                 else
                 {
-                    options.UseSqlServer(configuration.GetConnectionString("DatabaseTest"));
+                    options.UseSqlServer(GeneralConfig.Connstring);
                 }
             
                     
