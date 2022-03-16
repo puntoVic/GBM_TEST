@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class SecondMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,7 +46,7 @@ namespace DataAccess.Migrations
                 {
                     IdTransaction = table.Column<string>(nullable: false),
                     Timestamp = table.Column<string>(nullable: true),
-                    TypeOperation = table.Column<string>(nullable: false),
+                    TypeOperation = table.Column<string>(nullable: true),
                     Issuer_Name = table.Column<string>(nullable: true),
                     Issuer_Name1 = table.Column<string>(nullable: true),
                     Total_Shares = table.Column<int>(nullable: false),

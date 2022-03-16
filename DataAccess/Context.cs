@@ -23,7 +23,7 @@ namespace DataAccess
                 if (GeneralConfig.Connstring == null)
                 {
                     // Only used when generating migrations
-                    options.UseSqlServer("Set connection string only for migration");
+                    options.UseSqlServer("Server=DESKTOP-E0Q3KH2; Database= APITestGBM; User Id= sa; Password = SQL123;");
                 }
                 else
                 {

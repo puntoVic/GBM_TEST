@@ -21,13 +21,13 @@ namespace API_TestGBM.Controllers
         [HttpPost]
         public Response Purchase([FromBody] Transaction transaction)
         {
+            if(transaction.TypeOperation == "BUY")
             return B_Transaction.ExecutePurchase(transaction);
-        }
-        // POST api/<TransactionController>
-        public Response Sale([FromBody] Transaction transaction)
-        {
+            
             return B_Transaction.ExecuteSale(transaction);
         }
+        // POST api/<TransactionController>
+        
         
     }
 }
