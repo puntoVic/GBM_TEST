@@ -7,7 +7,7 @@ using Entities.Responses;
 
 namespace Business
 {
-    public class B_Transaction
+    public static class B_Transaction
     {
 
         /// <summary>
@@ -17,13 +17,13 @@ namespace Business
         public static Response ExecuteSale(Transaction transaction)
         {
             Response response = new Response() { Current_Balance = new Current_Balance(), Bussines_Errors = new List<Business_Error>() };
-            Account account = B_Account.SearchAccountById(transaction.AccountId);
-            if (account != null)
+            try
             {
-                Issuer issuer = B_Issuer.SearchIssuerByName(account.Issuers, transaction.Issuer_Name);
-                if (issuer != null)
+                Account account = B_Account.SearchAccountById(transaction.AccountId);
+                if (account != null)
                 {
-                    if (B_Issuer.CheckStock(issuer, transaction.Total_Shares))
+                    Issuer issuer = B_Issuer.SearchIssuerByName(account.Issuers, transaction.Issuer_Name);
+                    if (issuer != null && B_Issuer.CheckStock(issuer, transaction.Total_Shares))
                     {
                         issuer.Total_Shares -= transaction.Total_Shares;
                         account.Cash += transaction.Total_Shares * transaction.Shares_Prices;
@@ -31,17 +31,17 @@ namespace Business
                     }
                     else
                     {
-                        //Error
+                        response.Bussines_Errors.Add(new Business_Error() { Error = "NO STOCK" });
                     }
                 }
                 else
                 {
-                    //Error
+                    response.Bussines_Errors.Add(new Business_Error() { Error = "NON-EXISTENT ACCOUNT" });
                 }
             }
-            else
+            catch(Exception e)
             {
-                //Error
+                response.Bussines_Errors.Add(new Business_Error() { Error = e.Message });
             }
             return response;
 
@@ -53,22 +53,30 @@ namespace Business
         public static Response ExecutePurchase(Transaction transaction)
         {
             Response response = new Response() { Current_Balance = new Current_Balance(), Bussines_Errors = new List<Business_Error>() };
-            int total = transaction.Total_Shares * transaction.Shares_Prices;
-            Account account = B_Account.SearchAccountById(transaction.AccountId);
-            if (account != null  && B_Account.CheckBalance(account, total))
+            try
             {
-                Issuer issuer = B_Issuer.SearchIssuerByName(account.Issuers, transaction.Issuer_Name);
-                if (issuer == null)
+                int total = transaction.Total_Shares * transaction.Shares_Prices;
+                Account account = B_Account.SearchAccountById(transaction.AccountId);
+                if (account != null && B_Account.CheckBalance(account, total))
                 {
-                    account.Issuers.Add(new Issuer() { Issuer_Name = transaction.Issuer_Name, AccountId = account.AccountId, Total_Shares = 0 });
+                    Issuer issuer = B_Issuer.SearchIssuerByName(account.Issuers, transaction.Issuer_Name);
+                    if (issuer == null)
+                    {
+                        issuer = new Issuer() { Issuer_Name = transaction.Issuer_Name, AccountId = account.AccountId, Total_Shares = 0 };
+                        account.Issuers.Add(issuer);
+                    }
+                    issuer.Total_Shares += transaction.Total_Shares;
+                    account.Cash -= total;
+                    response = GenerateSuccessResponse(issuer, account);
                 }
-                issuer.Total_Shares += transaction.Total_Shares;
-                account.Cash -= total;
-                response = GenerateSuccessResponse(issuer, account);
+                else
+                {
+                    response.Bussines_Errors.Add(new Business_Error() { Error = "NON-EXISTENT ACCOUNT OR NO FOUNDS" });
+                }
             }
-            else
+            catch (Exception e)
             {
-                //Error cuenta no existe o no tiene fondos
+                response.Bussines_Errors.Add(new Business_Error() { Error = e.Message });
             }
             return response;
         }
@@ -76,10 +84,17 @@ namespace Business
         private static Response GenerateSuccessResponse(Issuer issuer, Account account)
         {
             Response response = new Response() { Current_Balance = new Current_Balance(), Bussines_Errors = new List<Business_Error>() };
-            B_Issuer.UpdateIssuer(issuer);
-            B_Account.UpdateAccount(account);
-            response.Current_Balance.Cash = account.Cash;
-            response.Current_Balance.Issuers = account.Issuers;
+            try
+            {
+                B_Issuer.UpdateIssuer(issuer);
+                B_Account.UpdateAccount(account);
+                response.Current_Balance.Cash = account.Cash;
+                response.Current_Balance.Issuers = account.Issuers;
+            }
+            catch (Exception e)
+            {
+                response.Bussines_Errors.Add(new Business_Error() { Error = e.Message });
+            }
             return response;
         }
 

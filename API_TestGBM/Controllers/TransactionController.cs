@@ -26,7 +26,6 @@ namespace API_TestGBM.Controllers
             else
                 return B_Transaction.ExecuteSale(transaction);
         }
-        // POST api/<TransactionController>
         
         
     }

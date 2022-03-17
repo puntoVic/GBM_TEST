@@ -6,7 +6,7 @@ using DataAccess;
 
 namespace Business
 {
-    public class B_Issuer
+    public static class B_Issuer
     {
         /// <summary>
         /// Initial function to create an issuer 

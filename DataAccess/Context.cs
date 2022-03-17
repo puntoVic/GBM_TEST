@@ -16,29 +16,25 @@ namespace DataAccess
         public DbSet<Transaction> Transactions { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuiulder)
         {
-            if (!options.IsConfigured)
+            if (!optionsBuiulder.IsConfigured)
             {
                 if (GeneralConfig.Connstring == null)
                 {
                     // Only used when generating migrations
-                    options.UseSqlServer("Server=DESKTOP-E0Q3KH2; Database= APITestGBM; User Id= sa; Password = SQL123;");
+                    optionsBuiulder.UseSqlServer("Server=DESKTOP-E0Q3KH2; Database= APITestGBM; User Id= sa; Password = SQL123;");
                 }
                 else
                 {
-                    options.UseSqlServer(GeneralConfig.Connstring);
+                    optionsBuiulder.UseSqlServer(GeneralConfig.Connstring);
                 }
             
                     
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
-            base.OnModelCreating(modelBuilder);
-        }
+        
     }
 }
 

@@ -6,7 +6,7 @@ using DataAccess;
 
 namespace Business
 {
-    public class B_Account
+    public static class B_Account
     {
         /// <summary>
         /// Initial function to create an account 
@@ -17,9 +17,16 @@ namespace Business
         {
             using (var db = new Context())
             {
-                account.Issuers = new List<Issuer>();
-                db.Accounts.Add(account);
-                return db.SaveChanges();
+                try
+                {
+                    account.Issuers = new List<Issuer>();
+                    db.Accounts.Add(account);
+                    return db.SaveChanges();
+                }
+                catch
+                {
+                    return 0;
+                }
             }
         }
         /// <summary>
@@ -31,7 +38,14 @@ namespace Business
         {
             using (var db = new Context())
             {
-                return db.Accounts.Find(id);
+                try
+                {
+                    return db.Accounts.Find(id);
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         /// <summary>
