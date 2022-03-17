@@ -7,7 +7,7 @@ namespace Entities
     public class Current_Balance
     {
         public int Cash { get; set; }
-        public List<Issuer> Issuers { get; set; }
+        public ICollection<Issuer> Issuers { get; set; }
 
         public Current_Balance()
         {

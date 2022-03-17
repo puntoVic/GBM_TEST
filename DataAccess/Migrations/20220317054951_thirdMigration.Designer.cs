@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220317000533_ThirdMigration")]
-    partial class ThirdMigration
+    [Migration("20220317054951_thirdMigration")]
+    partial class thirdMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,7 +104,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Transaction", b =>
                 {
                     b.HasOne("Entities.Account", "Account")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

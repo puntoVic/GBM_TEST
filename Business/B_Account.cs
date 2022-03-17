@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Entities;
 using DataAccess;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Business
 {
@@ -20,13 +22,22 @@ namespace Business
                 try
                 {
                     account.Issuers = new List<Issuer>();
-                    db.Accounts.Add(account);
-                    return db.SaveChanges();
+                    if (account.Cash < 0)
+                    {
+                        account.Cash = 0;
+                        return 0;
+                    }
+                    else
+                    {
+                        db.Accounts.Add(account);
+                        return db.SaveChanges();
+                    }
                 }
                 catch
                 {
                     return 0;
                 }
+                
             }
         }
         /// <summary>
@@ -40,7 +51,12 @@ namespace Business
             {
                 try
                 {
-                    return db.Accounts.Find(id);
+                    Account account = db.Accounts.ToList().LastOrDefault(x => x.AccountId == id);
+                    account.Issuers = db.Issuers.Where(x => x.AccountId == account.AccountId).ToList();
+                    return account;
+
+                    
+
                 }
                 catch
                 {
@@ -57,6 +73,7 @@ namespace Business
             using (var db = new Context())
             {
                 db.Accounts.Update(account);
+                db.SaveChanges();
 
             }
         }
@@ -73,7 +90,7 @@ namespace Business
 
         public static bool IsValidAccount(Account account)
         {
-            return account != null && account.AccountId > 0 && account.Issuers != null;
+            return account != null && account.AccountId >= 0 && account.Issuers != null;
         }
 
 

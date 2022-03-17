@@ -102,7 +102,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Transaction", b =>
                 {
                     b.HasOne("Entities.Account", "Account")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

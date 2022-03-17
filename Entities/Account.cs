@@ -14,7 +14,8 @@ namespace Entities
 
         public int Cash { get; set; }
 
-        public List<Issuer> Issuers { get; set; }
+        public ICollection<Issuer> Issuers { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
 
     }
 }

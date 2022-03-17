@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class ThirdMigration : Migration
+    public partial class thirdMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

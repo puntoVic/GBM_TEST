@@ -21,10 +21,16 @@ namespace API_TestGBM.Controllers
         [HttpPost]
         public Response Transaction([FromBody] Transaction transaction)
         {
-            if(transaction.Operation == "BUY")
+            if (transaction.Operation == "BUY")
                 return B_Transaction.ExecutePurchase(transaction);
-            else
+            else if (transaction.Operation == "SELL")
                 return B_Transaction.ExecuteSale(transaction);
+            else
+            {
+                Response response = new Response();
+                response.Bussines_Errors.Add(new Business_Error(){ Error = "INVALID_OPERATION" });
+                return response;
+            }
         }
         
         

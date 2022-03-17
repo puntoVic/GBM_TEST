@@ -20,8 +20,11 @@ namespace API_TestGBM.Controllers
         [HttpPost]
         public Account Post([FromBody] Account account)
         {
+            
             if (B_Account.CeateAccount(account) == 0)
+            {
                 account.Cash = 0;
+            }
             return account;
         }
 

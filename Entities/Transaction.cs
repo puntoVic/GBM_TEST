@@ -19,7 +19,7 @@ namespace Entities
         public int Shares_Prices { get; set; }
         
         public Int32 AccountId { get; set; }
-        public Account Account { get; set; }
+        private Account Account { get; set; }
 
 
     }

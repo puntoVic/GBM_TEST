@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Entities;
 using DataAccess;
+using System.Linq;
 
 namespace Business
 {
@@ -27,13 +28,13 @@ namespace Business
         /// <param name="issuers">Issuers List to find </param
         /// <param name="issuer_name">Issuer name</param>
         /// <returns></returns>
-        public static Issuer SearchIssuerByName(List<Issuer> issuers, string issuer_name)
+        public static Issuer SearchIssuerByName(ICollection<Issuer> issuers, string issuer_name)
         {
             try
             {
-                return issuers.Find(x => x.Issuer_Name == issuer_name);
+                return issuers.Where(x => x.Issuer_Name == issuer_name).FirstOrDefault();
             }
-            catch (NullReferenceException e)
+            catch 
             {
                 return null;
             }
@@ -48,7 +49,7 @@ namespace Business
             using (var db = new Context())
             {
                 db.Issuers.Update(issuer);
-
+                db.SaveChanges();
             }
         }
         /// <summary>
