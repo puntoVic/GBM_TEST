@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class SecondMigration : Migration
+    public partial class ThirdMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,13 +10,13 @@ namespace DataAccess.Migrations
                 name: "Accounts",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    AccountId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Cash = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                    table.PrimaryKey("PK_Accounts", x => x.AccountId);
                 });
 
             migrationBuilder.CreateTable(
@@ -26,8 +26,7 @@ namespace DataAccess.Migrations
                     Issuer_Name = table.Column<string>(nullable: false),
                     Total_Shares = table.Column<int>(nullable: false),
                     Shares_Price = table.Column<int>(nullable: false),
-                    Id = table.Column<string>(nullable: true),
-                    AccountId = table.Column<long>(nullable: true)
+                    AccountId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,8 +35,8 @@ namespace DataAccess.Migrations
                         name: "FK_Issuer_Accounts_AccountId",
                         column: x => x.AccountId,
                         principalTable: "Accounts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "AccountId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,13 +45,12 @@ namespace DataAccess.Migrations
                 {
                     IdTransaction = table.Column<string>(nullable: false),
                     Timestamp = table.Column<string>(nullable: true),
-                    TypeOperation = table.Column<string>(nullable: true),
+                    Operation = table.Column<string>(nullable: true),
                     Issuer_Name = table.Column<string>(nullable: true),
                     Issuer_Name1 = table.Column<string>(nullable: true),
                     Total_Shares = table.Column<int>(nullable: false),
                     Shares_Prices = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false),
-                    AccountId = table.Column<long>(nullable: true)
+                    AccountId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,8 +59,8 @@ namespace DataAccess.Migrations
                         name: "FK_Transactions_Accounts_AccountId",
                         column: x => x.AccountId,
                         principalTable: "Accounts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "AccountId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Transactions_Issuer_Issuer_Name1",
                         column: x => x.Issuer_Name1,

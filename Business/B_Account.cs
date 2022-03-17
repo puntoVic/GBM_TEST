@@ -27,7 +27,7 @@ namespace Business
         /// </summary>
         /// <param name="id">Account Id</param>
         /// <returns></returns>
-        public static Account SearchAccountById(Int64 id)
+        public static Account SearchAccountById(Int32 id)
         {
             using (var db = new Context())
             {
@@ -59,7 +59,7 @@ namespace Business
 
         public static bool IsValidAccount(Account account)
         {
-            return account != null && account.Id > 0 && account.Issuers != null;
+            return account != null && account.AccountId > 0 && account.Issuers != null;
         }
 
 

@@ -19,9 +19,9 @@ namespace API_TestGBM.Controllers
 
         // POST api/<TransactionController>
         [HttpPost]
-        public Response Purchase([FromBody] Transaction transaction)
+        public Response Transaction([FromBody] Transaction transaction)
         {
-            if(transaction.TypeOperation == "BUY")
+            if(transaction.Operation == "BUY")
                 return B_Transaction.ExecutePurchase(transaction);
             else
                 return B_Transaction.ExecuteSale(transaction);

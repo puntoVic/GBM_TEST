@@ -7,11 +7,11 @@ namespace Entities
     public class Current_Balance
     {
         public int Cash { get; set; }
-        public List<Issuer> Stocks { get; set; }
+        public List<Issuer> Issuers { get; set; }
 
         public Current_Balance()
         {
-            Stocks = new List<Issuer>();
+            Issuers = new List<Issuer>();
         }
 
     }

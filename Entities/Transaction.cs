@@ -12,13 +12,13 @@ namespace Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string IdTransaction { get; set;}
         public string Timestamp { get; set; }
-        public string TypeOperation { get; set;  }
+        public string Operation { get; set;  }
         public string Issuer_Name { get; set; }
         public Issuer Issuer { get; set; }
         public int Total_Shares { get; set; }
         public int Shares_Prices { get; set; }
         
-        public int Id { get; set; }
+        public Int32 AccountId { get; set; }
         public Account Account { get; set; }
 
 

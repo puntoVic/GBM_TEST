@@ -10,7 +10,7 @@ namespace Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Int64 Id { get; set; }
+        public Int32 AccountId { get; set; }
 
         public int Cash { get; set; }
 

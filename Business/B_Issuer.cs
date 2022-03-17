@@ -29,8 +29,14 @@ namespace Business
         /// <returns></returns>
         public static Issuer SearchIssuerByName(List<Issuer> issuers, string issuer_name)
         {
-           
-            return issuers.Find(x => x.Issuer_Name == issuer_name);
+            try
+            {
+                return issuers.Find(x => x.Issuer_Name == issuer_name);
+            }
+            catch (NullReferenceException e)
+            {
+                return null;
+            }
            
         }
         /// <summary>

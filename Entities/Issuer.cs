@@ -13,7 +13,7 @@ namespace Entities
         public string Issuer_Name { get; set; }
         public int Total_Shares { get; set; }
         public int Shares_Price { get; set; }
-        public string Id { get; set; }
+        public Int32 AccountId { get; set; }
         public Account Account { get; set; }
     }
 }
